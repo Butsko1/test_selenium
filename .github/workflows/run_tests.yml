@@ -27,9 +27,37 @@ jobs:
         run: sudo apt-get install google-chrome-stable
       - name: Install dependencies
         run: pip install -r requirements.txt
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+            distribution: zulu
+            java-version: 17
       - name: first_test
         if: "github.event.inputs.deployment_target == 'first_test'"
-        run:  rm  "allure-results\*"; pytest -v -s tests/ui/test_first.py::test_first --alluredir "allure-results"; allure serve allure-results
+        run: pytest -v -s tests/ui/test_first.py::test_first --alluredir "allure-results"
       - name: second_test
         if: "github.event.inputs.deployment_target == 'second_test'"
-        run:  rm  "allure-results\*"; pytest -v -s tests/ui/test_first.py::test_second --alluredir "allure-results"; allure serve allure-results
+        run: pytest -v -s tests/ui/test_first.py::test_second --alluredir "allure-results"
+      - name: Load test report history
+        uses: actions/checkout@v3
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Build test report
+        uses: simple-elf/allure-report-action@v1.7
+        if: always()
+        with:
+              gh_pages: gh-pages
+              allure_history: allure-history
+              allure_results: build/allure-results
+
+      - name: Publish test report
+        uses: peaceiris/actions-gh-pages@v3
+        if: always()
+        with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_branch: gh-pages
+            publish_dir: allure-history
