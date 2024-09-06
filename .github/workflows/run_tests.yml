@@ -28,8 +28,8 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
       - name: first_test
-        if: "github.event.inputs.deployment_target == 'first_test'"
+        if: "github.event.inputs.deployment_target == 'test_first'"
         run: pytest tests/ui/test_first.py::first_test
       - name: second_test
-        if: "github.event.inputs.deployment_target == 'second_test'"
+        if: "github.event.inputs.deployment_target == 'test_second'"
         run: pytest tests/ui/test_first.py::second_test

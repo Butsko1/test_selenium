@@ -16,7 +16,7 @@ driver.maximize_window()
 # Задаем список доступных юзеров и пароль
 list_of_users = ['standard_user', 'locked_out_user', 'problem_user', 'performance_glitch_user', 'error_user', 'visual_user']
 password = 'secret_sauce'
-def first_test():
+def test_first():
 
     # Прогоняем через цикл
     for i in list_of_users:
@@ -44,5 +44,5 @@ def first_test():
             password_field.send_keys(Keys.BACKSPACE)
 
 
-def second_test():
+def test_second():
     assert 2 == 3, "2 не равно 3"
