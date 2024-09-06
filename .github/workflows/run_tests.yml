@@ -29,7 +29,7 @@ jobs:
         run: pip install -r requirements.txt
       - name: first_test
         if: "github.event.inputs.deployment_target == 'first_test'"
-        run:  rm  "allure-results\*"; pytest -v -s tests/ui/test_first.py::test_first --alluredir "allure-results"; allure serve allure-results
+        run: pytest -v -s tests/ui/test_first.py::test_first --alluredir "allure-results"
       - name: second_test
         if: "github.event.inputs.deployment_target == 'second_test'"
-        run:  rm  "allure-results\*"; pytest -v -s tests/ui/test_first.py::test_second --alluredir "allure-results"; allure serve allure-results
+        run: pytest -v -s tests/ui/test_first.py::test_second --alluredir "allure-results"
