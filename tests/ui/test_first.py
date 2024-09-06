@@ -16,6 +16,7 @@ driver.maximize_window()
 # Задаем список доступных юзеров и пароль
 list_of_users = ['standard_user', 'locked_out_user', 'problem_user', 'performance_glitch_user', 'error_user', 'visual_user']
 password = 'secret_sauce'
+
 def test_first():
 
     # Прогоняем через цикл
