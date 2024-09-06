@@ -9,7 +9,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 options = webdriver.ChromeOptions()
 options.add_argument("headless")
-driver = webdriver.Chrome()
+driver = webdriver.Chrome(options=options)
 driver.get("https://www.saucedemo.com/")
 driver.maximize_window()
 
